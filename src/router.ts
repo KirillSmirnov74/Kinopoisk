@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router'
-import { Layout } from './components/Loyaut'
+import { Layout } from '../src/components/Layout'
+import { MovieList } from './components/MovieList'
 import type { RouteObject } from 'react-router'
-import { MovieList } from './components/Movielist'
+
 
 const routes: RouteObject[] = [
   {

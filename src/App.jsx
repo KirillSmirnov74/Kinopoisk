@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router';
 import { router } from './router';
 import { MovieNavigation } from './components/MoviesNavigation';
 import { MovieList } from './components/Movielist';
-import { Layout } from './components/Loyaut';
+import { Layout } from '../src/components/Layout';
 
 export function App() {
   return (
