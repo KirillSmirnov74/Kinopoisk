@@ -1,38 +1,60 @@
-export function FormField() {
-  return (
-    <form className=''>
-      <div className='relative'>
-        <div className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className='h-5 w-5'
-            viewBox='0 0 20 20'
-            fill='currentColor'
-          >
-            <path
-              fillRule='evenodd'
-              d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z'
-              clipRule='evenodd'
-            />
-          </svg>
-        </div>
+import { useRef, useEffect } from 'react';
+import Filters from '../assets/icons/Filters.svg?react';
 
+interface FormFieldProps {
+  onClose: () => void;
+}
+
+export function FormField({ onClose }: FormFieldProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current?.focus()
+    }
+  }, []);
+
+  function handleClickFiltersIcon(event: React.MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation()
+  }
+
+  return (
+    <div
+      className={`
+        absolute 
+        left-[245px] right-[230px] top-1/2 -translate-y-1/2
+        z-40
+        transition-all duration-500 ease-out
+      `}
+    >
+      <div className='relative'>
         <input
+          ref={inputRef}
           type='text'
           placeholder='Поиск фильмов...'
+          onBlur={onClose}
           className='
-            w-md
-            pl-10 pr-4 py-3
-            bg-white border border-gray-300 rounded-xl
-            focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500
-            transition-all duration-200
-            placeholder-gray-400
-            text-base
-            shadow-sm
-            hover:shadow
-            '
+            w-full pl-4 pr-10 py-2
+            bg-white/70 backdrop-blur-sm rounded-lg
+            shadow-md border-0
+            focus:outline-none focus:ring-0 
+            text-sm placeholder-gray-400
+          '
         />
+
+        <button
+          type='button'
+          onClick={handleClickFiltersIcon}
+          className='
+            absolute right-2 top-1/2 -translate-y-1/2
+            p-1 rounded
+            text-gray-400 hover:text-pink-500 hover:bg-pink-50
+            transition-colors duration-200
+          '
+        >
+          <Filters width={16} height={16} className='fill-current' />
+        </button>
       </div>
-    </form>
+    </div>
   );
 }

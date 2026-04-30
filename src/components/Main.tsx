@@ -6,7 +6,7 @@ export class Main extends React.Component<MainProps> {
 
   render() {
     return (
-      <main className={`w-full flex gap-6 justify-center  `}>
+      <main className={`w-full flex gap-6 justify-center `}>
         {this.props.children}
       </main>
     );
