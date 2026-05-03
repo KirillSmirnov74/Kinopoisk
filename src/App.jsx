@@ -8,9 +8,8 @@ import { Layout } from '../src/components/Layout';
 export function App() {
   return (
     <>
-      <Layout />
+      {/* <Layout /> */}
+      <RouterProvider router={router} />
     </>
   );
-
-  // ) <RouterProvider router={router} />;
 }

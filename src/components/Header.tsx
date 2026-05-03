@@ -3,7 +3,7 @@ import KinopoiskLogo from '../assets/icons/Kinopoisk.svg?react';
 import Search from '../assets/icons/Search.svg?react';
 import { MovieNavigation } from './MoviesNavigation';
 import { UserPick } from './UserPick';
-import { FormField } from './FormField';
+import { FormFieldForHeader } from './FormFieldForHeader';
 import { PopularSearchesPanel } from './PopularSearchesPanel';
 
 export function Header() {
@@ -39,7 +39,7 @@ export function Header() {
                 <Search width={24} height={24} className="fill-current" />
               </button>
             ) : (
-              <FormField onClose={handleCloseSearch} />
+              <FormFieldForHeader onClose={handleCloseSearch} />
             )}
             <UserPick />
           </div>
@@ -47,7 +47,11 @@ export function Header() {
         </div>
       </div>
       {isSearch && (
-        <div className='absolute top-full left-0 w-full z-40 bg-pink-100 backdrop-blur-md shadow-lg border-t border-pink-100'>
+        <div key="search-panel" className='
+          absolute top-full left-0 w-full
+          z-40 bg-pink-100 backdrop-blur-md
+          shadow-lg border-t border-pink-100
+          '>
           <div className='container mx-auto px-6 py-8'>
             <PopularSearchesPanel />
           </div>
