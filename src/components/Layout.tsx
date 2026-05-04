@@ -9,7 +9,7 @@ export function Layout() {
   const showHeader = !hideOnPaths.includes(location.pathname);
 
   return (
-    <div className='flex flex-col bg-red-200 min-h-screen px-5'>
+    <div className='flex flex-col bg-red-200 min-h-screen'>
 
       {showHeader && <Header />}
 

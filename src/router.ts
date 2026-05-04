@@ -22,7 +22,6 @@ const routes: RouteObject[] = [
         path: '/auth/sign-up',
         Component: SignUp
       }
-     
     ]
   },
 ]

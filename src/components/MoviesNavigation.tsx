@@ -1,6 +1,5 @@
 import Home from '../assets/icons/Home.svg?react';
 import Favorites from '../assets/icons/Favorites.svg?react';
-import Settings from '../assets/icons/Settings.svg?react';
 import Trends from '../assets/icons/Trends.svg?react';
 
 export function MovieNavigation() {
@@ -8,7 +7,6 @@ export function MovieNavigation() {
     { icon: Home, label: 'Home', href: '#' },
     { icon: Favorites, label: 'Favorites', href: '#' },
     { icon: Trends, label: 'Trends', href: '#' },
-    { icon: Settings, label: 'Settings', href: '#' },
   ];
 
   return (

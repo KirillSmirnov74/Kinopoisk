@@ -1,6 +1,18 @@
+import { useEffect } from "react";
 import { MovieCardL } from "./MovieCardL";
+import { useAppSelector } from "../redux/store";
+// import { fetchFilms } from "../redux/films-slice";
+
 
 export function MovieList() {
+  const films = useAppSelector((state) => state.films.data)
+  // const dispatch = useAppDispatch()
+  console.log(films)
+
+  useEffect(() => {
+    // dispatch(fetchFilms())
+  }, [])
+
   return (
     <div className='grid grid-cols-5 gap-5 w-full max-w-7xl mx-auto px-5 '>
       <div>

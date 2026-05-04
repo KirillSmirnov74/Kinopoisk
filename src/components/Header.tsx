@@ -5,12 +5,18 @@ import { MovieNavigation } from './MoviesNavigation';
 import { UserPick } from './UserPick';
 import { FormFieldForHeader } from './FormFieldForHeader';
 import { PopularSearchesPanel } from './PopularSearchesPanel';
+import { Collapse } from './Collapse';
 
 export function Header() {
   const [isSearch, setIsSearch] = useState<boolean>(false);
+  const [isOpenCollapse, setIsOpenCollapse] = useState<boolean>(false)
 
   function handleCloseSearch() {
     setIsSearch(false)
+  }
+
+  function handleClickChevronDown() {
+    setIsOpenCollapse(!isOpenCollapse)
   }
 
   return (
@@ -41,11 +47,12 @@ export function Header() {
             ) : (
               <FormFieldForHeader onClose={handleCloseSearch} />
             )}
-            <UserPick />
+            <UserPick onClick={handleClickChevronDown} isOpen={isOpenCollapse} />
           </div>
 
         </div>
       </div>
+
       {isSearch && (
         <div key="search-panel" className='
           absolute top-full left-0 w-full
@@ -57,7 +64,8 @@ export function Header() {
           </div>
         </div>
       )}
-    </header>
 
+      {isOpenCollapse && (<Collapse />)}
+    </header>
   );
 }
