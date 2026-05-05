@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router'
 import { Layout } from '../src/components/Layout'
-import { MovieList } from './components/MovieList'
 import type { RouteObject } from 'react-router'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
+import { Main } from './pages/Main'
 
 
 const routes: RouteObject[] = [
@@ -12,7 +12,7 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        Component: MovieList,
+        Component: Main,
       },
       {
         path: '/auth/sign-in',

@@ -9,37 +9,51 @@ export type FormFieldProps =  {
 }
 
 export interface FilmModel {
-  kinopoiskId: number;
-  imdbId: string | null;
-  nameRu: string | null;
-  nameEn: string | null;
-  nameOriginal: string | null;
-  countries: CountryModel[];
-  genres: GenreModel[];
-  ratingKinopoisk: number | null;
-  ratingImdb: number | null;
-  year: number;
-  type: string; 
-  posterUrl: string;
-  posterUrlPreview: string;
+  kinopoiskId: number,
+  imdbId: string | null,
+  nameRu: string | null,
+  nameEn: string | null,
+  nameOriginal: string | null,
+  countries: CountryModel[],
+  genres: GenreModel[],
+  ratingKinopoisk: number | null,
+  ratingImdb: number | null,
+  year: number,
+  type: string,
+  posterUrl: string,
+  posterUrlPreview: string,
 }
 
 export interface CountryModel {
-  country: string;
+  country: string
 }
 
 export interface GenreModel {
-  genre: string;
+  genre: string
 }
 
 export interface FilmsResponse {
-  total: number;
-  totalPages: number;
-  items: FilmModel[];
+  total: number,
+  totalPages: number,
+  items: FilmModel[],
 }
 
 export interface FilmsState {
     data: FilmModel[],
     loading: boolean,
     error: boolean
+}
+
+export interface MovieListProps {
+  data: FilmModel[],
+}
+
+export interface MovieCardLProps {
+  kinopoiskId : number,
+  nameRu: string | null,
+  posterUrl: string,
+  ratingKinopoisk: number | null,
+  year: number | null,           
+  genres: { genre: string }[], 
+   onClickCard: (event: React.MouseEvent<HTMLDivElement>) => void;
 }

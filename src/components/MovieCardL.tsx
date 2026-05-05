@@ -1,15 +1,21 @@
-import { PosterL } from "./PosterL"
-export function MovieCardL() {
+import { MovieCardLProps } from "../types";
+import { PosterL } from "./PosterL";
+
+const FALLBACK_POSTER = 'data:image/png;base64,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';
+
+export function MovieCardL({ nameRu, posterUrl, ratingKinopoisk, year, genres, kinopoiskId, onClickCard }: MovieCardLProps) {
+    const isValidPoster = posterUrl && !posterUrl.includes('no-poster.png');
+
     return (
-        <article className=' relative w-full rounded-2xl flex flex-col'>
-            <PosterL />
+        <div onClick={onClickCard} data-id={kinopoiskId} className='relative w-full rounded-2xl flex flex-col'>
+            <PosterL posterUrl={isValidPoster ? posterUrl : FALLBACK_POSTER} />
             <p className="absolute top-4 left-4 bg-green-500 text-white px-2 py-1 rounded-lg text-xs font-semibold">
-                7.6
+                {ratingKinopoisk}
             </p>
             <div className="pl-3">
-                <h3 className="text-base font-bold text-black">Star Wars</h3>
-                <span className="text-xs text-gray-500">2026, Fantasy</span>
+                <h3 className="text-base font-bold text-black">{nameRu}</h3>
+                <span className="text-xs text-gray-500">{year}, {genres[0]?.genre}</span>
             </div>
-        </article>
-    )
+        </div>
+    );
 }
