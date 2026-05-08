@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { requestFilms } from "../servisces/films";
-import { FilmsResponse, FilmsState } from "../types";
+import { requestFilms, requestSimilarsFilms } from "../services/films";
+import { FilmsResponse, FilmsState, SimilarsFilmsResponse } from "../types";
 
-export const fetchFilms = createAsyncThunk<FilmsResponse>('films/fetchFilms',async (_, { rejectWithValue }) => {
+export const fetchFilms = createAsyncThunk('films/fetchFilms',async (_, { rejectWithValue }) => {
     try {
       const films = await requestFilms()
       return films
@@ -12,8 +12,18 @@ export const fetchFilms = createAsyncThunk<FilmsResponse>('films/fetchFilms',asy
   }
 )
 
+export const fetchSimilarsFilms = createAsyncThunk('films/fetchSimilarsFilms', async (id: number, { rejectWithValue }) => {
+    try {
+        const similarsFilms = await requestSimilarsFilms(id)
+        return similarsFilms
+    } catch (error) {
+        return rejectWithValue(error as Error)
+    }
+})
+
 const initialState: FilmsState = {
   data: [],
+  similarsFilms: [],
   loading: false,
   error: false,
 }
@@ -23,7 +33,8 @@ export const filmsSlice = createSlice({
   initialState,
   reducers: {}, 
   extraReducers: (builder) => {
-    builder.addCase(fetchFilms.pending, (state: FilmsState) => {
+
+      builder.addCase(fetchFilms.pending, (state: FilmsState) => {
         state.loading = true
       })
       builder.addCase(fetchFilms.fulfilled, (state: FilmsState, action: PayloadAction<FilmsResponse>) => {
@@ -31,6 +42,18 @@ export const filmsSlice = createSlice({
         state.data = action.payload.items
       })
       builder.addCase(fetchFilms.rejected, (state: FilmsState) => {
+        state.loading = false
+        state.error = true
+      })
+
+      builder.addCase(fetchSimilarsFilms.pending, (state: FilmsState) => {
+        state.loading = true
+      })
+      builder.addCase(fetchSimilarsFilms.fulfilled, (state: FilmsState, action: PayloadAction<SimilarsFilmsResponse>) => {
+        state.loading = false
+        state.similarsFilms = action.payload.items
+      })
+      builder.addCase(fetchSimilarsFilms.rejected, (state: FilmsState) => {
         state.loading = false
         state.error = true
       })

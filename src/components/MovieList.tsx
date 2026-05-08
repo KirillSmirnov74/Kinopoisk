@@ -1,16 +1,19 @@
-
 import { MovieListProps } from "../types";
 import { MovieCardL } from "./MovieCardL";
+import { useNavigate } from "react-router";
 
 
 
 export function MovieList({ data }: MovieListProps): React.ReactElement {
 
-  function handleClicCardFilm(event: React.MouseEvent<HTMLDivElement>) {
+  const navigate = useNavigate()
+
+  function handleClickCardFilm(event: React.MouseEvent<HTMLDivElement>) {
     const filmElement = (event.target as HTMLElement).closest('[data-id]');
     if (filmElement) {
       const filmId = (filmElement as HTMLElement).dataset.id;
-      console.log(filmId)
+      console.log(filmId);
+      navigate(`/film/${filmId}`)
     }
   }
 
@@ -25,7 +28,7 @@ export function MovieList({ data }: MovieListProps): React.ReactElement {
           ratingKinopoisk={film.ratingKinopoisk}
           year={film.year}
           genres={film.genres}
-          onClickCard={handleClicCardFilm}
+          onClickCard={handleClickCardFilm}
         />
       ))}
     </div>

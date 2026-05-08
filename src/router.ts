@@ -4,6 +4,7 @@ import type { RouteObject } from 'react-router'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
 import { Main } from './pages/Main'
+import { MoviePage } from './pages/MoviePage'
 
 
 const routes: RouteObject[] = [
@@ -21,6 +22,10 @@ const routes: RouteObject[] = [
       {
         path: '/auth/sign-up',
         Component: SignUp
+      },
+      {
+        path: '/film/:filmId',
+        Component: MoviePage
       }
     ]
   },
