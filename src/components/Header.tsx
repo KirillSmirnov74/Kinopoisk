@@ -4,7 +4,6 @@ import Search from '../assets/icons/Search.svg?react';
 import { MovieNavigation } from './MoviesNavigation';
 import { UserPick } from './UserPick';
 import { FormFieldForHeader } from './FormFieldForHeader';
-import { PopularSearchesPanel } from './PopularSearchesPanel';
 import { Collapse } from './Collapse';
 
 export function Header() {
@@ -52,19 +51,6 @@ export function Header() {
 
         </div>
       </div>
-
-      {isSearch && (
-        <div key="search-panel" className='
-          absolute top-full left-0 w-full
-          z-40 bg-pink-100 backdrop-blur-md
-          shadow-lg border-t border-pink-100
-          '>
-          <div className='container mx-auto px-6 py-8'>
-            <PopularSearchesPanel />
-          </div>
-        </div>
-      )}
-
       {isOpenCollapse && (<Collapse />)}
     </header>
   );

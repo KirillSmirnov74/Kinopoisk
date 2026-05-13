@@ -10,7 +10,7 @@ export type FormFieldProps =  {
 
 export interface FilmModel {
   kinopoiskId: number,
-  imdbId: string | null,
+  imdbId? : string,
   nameRu: string | null,
   nameEn: string | null,
   nameOriginal: string | null,
@@ -38,6 +38,9 @@ export interface FilmsResponse {
   totalPages: number,
   items: FilmModel[],
 }
+
+export type SearchFilmsResponse = FilmsResponse
+
 
 export interface CountryModel {
   country: string;
@@ -134,9 +137,24 @@ export interface BudgetModel {
 
 export interface FilmsState {
     data: FilmModel[],
-    similarsFilms: SimilarsFilmModel[]
+    totalPages: number,
+    similarsFilms: SimilarsFilmModel[],
     loading: boolean,
-    error: boolean
+    error: boolean,
+}
+
+export interface Top250FilmsState {
+    data: FilmModel[],
+    totalPages: number,
+    loading: boolean,
+    error: boolean,
+}
+
+export interface ResultsOfSearchState {
+    data: FilmModel[],
+    totalPages: number,
+    loading: boolean,
+    error: boolean,
 }
 
 export interface FilmState {
@@ -155,7 +173,7 @@ export interface MovieCardLProps {
   kinopoiskId : number,
   nameRu: string | null,
   posterUrl: string,
-  ratingKinopoisk?: number | null,
+  ratingKinopoisk: number | null,
   year: number | null,           
   genres: { genre: string }[], 
   onClickCard: (event: React.MouseEvent<HTMLDivElement>) => void;
@@ -173,7 +191,8 @@ export interface MovieInfoProps {
   countries : {country: string}[] | null
   budget: BudgetModel[] | null,
   ratingAge : string | null,
-  slogan: string | null
+  slogan: string | null,
+  staff: StaffMember[] | null,
 }
 
 export interface SimilarsFilmModel {
@@ -209,3 +228,24 @@ export interface StaffMember {
 
 export type StaffResponse = StaffMember[];
 
+export interface PeopleListProps {
+    people: StaffMember[] | null;
+    maxToShow?: number;
+}
+
+export interface MovieMetaInfoProps {
+   orgName: string | null,
+    slogan: string |  null,
+    age : string | null,
+    year : string | number
+    countries : string,
+    symbol : string | null,
+    amount : string | number,
+    directorsData: StaffMember[] | null,
+    actorsData: StaffMember[] | null,
+}
+
+ export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+}

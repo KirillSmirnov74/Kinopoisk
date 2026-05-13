@@ -1,4 +1,6 @@
- export function getRatingColor(rating : number | null) : string  {
+import { StaffMember } from "./types";
+
+export function getRatingColor(rating : number | null) : string  {
     if(!rating) return ''
     if (rating >= 8.0) return "bg-emerald-500 border-emerald-500/30";
     if (rating >= 5) return "bg-orange-500 border-orange-500/30";
@@ -13,8 +15,17 @@ export function parseAge(age: string | null) : string   {
     return parseAge + '+'
 }
 
-export function validFilmsWithPoster(films : any[]) {
+export function getFilmsWithPoster(films : any[]) {
+    if (!films) return [];
     const validFilms = films.filter((film) => !film.posterUrl.includes('no-poster'))
     return validFilms
+}
+
+export function filterStaffMember(staff: StaffMember[] | null,profession: string) {
+    if(!staff) {
+        return []
+    }
+    const staffProfession = staff.filter((member) => member.professionKey?.includes(profession))
+    return staffProfession ? staffProfession : []
 }
 

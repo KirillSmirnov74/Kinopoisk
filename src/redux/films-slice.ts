@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { requestFilms, requestSimilarsFilms } from "../services/films";
 import { FilmsResponse, FilmsState, SimilarsFilmsResponse } from "../types";
 
-export const fetchFilms = createAsyncThunk('films/fetchFilms',async (_, { rejectWithValue }) => {
+export const fetchFilms = createAsyncThunk('films/fetchFilms',async (page: number, { rejectWithValue }) => {
     try {
-      const films = await requestFilms()
+      const films = await requestFilms(page)
       return films
     } catch (error) {
       return rejectWithValue(error as Error)
@@ -23,6 +23,7 @@ export const fetchSimilarsFilms = createAsyncThunk('films/fetchSimilarsFilms', a
 
 const initialState: FilmsState = {
   data: [],
+  totalPages: 0,
   similarsFilms: [],
   loading: false,
   error: false,
@@ -31,7 +32,11 @@ const initialState: FilmsState = {
 export const filmsSlice = createSlice({
   name: 'films',
   initialState,
-  reducers: {}, 
+  reducers: {
+     setTotalPages: (state: FilmsState, action: PayloadAction<number>) => {
+      state.totalPages = action.payload
+    },
+  }, 
   extraReducers: (builder) => {
 
       builder.addCase(fetchFilms.pending, (state: FilmsState) => {
@@ -40,6 +45,7 @@ export const filmsSlice = createSlice({
       builder.addCase(fetchFilms.fulfilled, (state: FilmsState, action: PayloadAction<FilmsResponse>) => {
         state.loading = false
         state.data = action.payload.items
+        state.totalPages = action.payload.totalPages
       })
       builder.addCase(fetchFilms.rejected, (state: FilmsState) => {
         state.loading = false
@@ -59,5 +65,5 @@ export const filmsSlice = createSlice({
       })
   },
 });
-
+export const { setTotalPages } = filmsSlice.actions
 export const filmsReducer =  filmsSlice.reducer

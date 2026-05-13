@@ -28,9 +28,6 @@ export function SwiperComponent({ data }: { data: SimilarsFilmModel[] }) {
                     dynamicBullets: true,
                     dynamicMainBullets: 3,
                 }}
-                scrollbar={{
-                    draggable: true,
-                }}
 
                 mousewheel={{
                     enabled: true,
@@ -67,7 +64,6 @@ export function SwiperComponent({ data }: { data: SimilarsFilmModel[] }) {
                             posterUrl={film.posterUrl}
                         />
                     </SwiperSlide>
-
                 ))}
             </Swiper>
         </div>

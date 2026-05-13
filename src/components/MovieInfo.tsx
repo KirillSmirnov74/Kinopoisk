@@ -1,7 +1,8 @@
 import React from "react";
 import { Title } from "./Title";
 import { MovieInfoProps } from "../types";
-import { getRatingColor, parseAge } from "../helpers";
+import { filterStaffMember, getRatingColor, parseAge } from "../helpers";
+import { MovieMetaInfo } from "./MovieMetaInfo";
 
 export function MovieInfo({
     title,
@@ -15,13 +16,18 @@ export function MovieInfo({
     countries,
     budget,
     ratingAge,
-    slogan
+    slogan,
+    staff
 }: MovieInfoProps): React.ReactElement {
 
     const genresToStroke = genres?.map((genre => genre.genre)).join(', ')
-    const countntriesToStroke = countries?.map((country) => country.country).join(', ')
+    const countntriesToStroke = countries?.map((country) => country.country).join(', ') ?? '—'
     const colors = getRatingColor(ratingKinopoisk)
-    const parseddAge = parseAge(ratingAge)
+    const parsedAge = parseAge(ratingAge)
+    const directors = filterStaffMember(staff, 'DIRECTOR')
+    const actors = filterStaffMember(staff, 'ACTOR')
+    console.log(directors)
+    console.log(actors)
 
 
     const { amount, symbol } = budget?.[0] || {};
@@ -55,29 +61,16 @@ export function MovieInfo({
                 </p>
             </div>) : null}
 
-
-            <div className="border-t border-gray-700/50 pt-8 mb-10">
-                <div className="grid grid-cols-[200px_1fr] gap-y-5 text-sm">
-
-                    <div className="text-gray-500 font-medium">Оригинальное название</div>
-                    <div className="text-gray-200">{validOrgName}</div>
-
-                    <div className="text-gray-500 font-medium">Слоган</div>
-                    <div className="text-gray-200">{validSlogan}</div>
-
-                    <div className="text-gray-500 font-medium">Возрастные ограничения</div>
-                    <div className="text-gray-200">{parseddAge}</div>
-
-                    <div className="text-gray-500 font-medium">Год производства</div>
-                    <div className="text-gray-200">{validYear}</div>
-
-                    <div className="text-gray-500 font-medium">Страна</div>
-                    <div className="text-gray-200">{countntriesToStroke}</div>
-
-                    <div className="text-gray-500 font-medium">Бюджет</div>
-                    <div className="text-gray-200">{`${validSymbol} ${validAmount}`}</div>
-                </div>
-            </div>
+            <MovieMetaInfo
+                orgName={validOrgName}
+                slogan={validSlogan}
+                age={parsedAge}
+                year={validYear}
+                countries={countntriesToStroke}
+                symbol={validSymbol}
+                amount={validAmount}
+                directorsData={directors}
+                actorsData={actors} />
         </div>
     )
 }
