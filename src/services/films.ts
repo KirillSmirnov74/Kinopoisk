@@ -1,6 +1,6 @@
 import { get } from '../config/http-client'
 import { API } from '../config/api'
-import { FilmBudgetResponse, FilmResponse, FilmsResponse, SimilarsFilmsResponse, StaffResponse,SearchFilmsResponse } from '../types'
+import { FilmBudgetResponse, FilmResponse, FilmsResponse, SimilarsFilmsResponse,SearchFilmsResponse } from '../types'
 
 export async function requestFilms(page: number,type: string =  'TOP_POPULAR_MOVIES'): Promise<FilmsResponse> {
     const response = await get(`${API.films}/collections`,{
@@ -37,14 +37,7 @@ export async function requestSimilarsFilms(filmId:number) : Promise<SimilarsFilm
     return response.data
 }
 
-export async function requestFilmStaff(filmId: number) : Promise<StaffResponse> {
-    const response = await get(API.staff,{
-        params: {
-            filmId
-        }
-    })
-    return response.data
-}
+
 
 export async function requestFilmsByKeyword(page: number,keyword:string) : Promise<SearchFilmsResponse> {
     const response = await get(`${API.films}`,{
@@ -55,6 +48,8 @@ export async function requestFilmsByKeyword(page: number,keyword:string) : Promi
     })
     return response.data
 }
+
+
 
 
 

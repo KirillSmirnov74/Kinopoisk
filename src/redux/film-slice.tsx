@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { requestFilm, requestFilmBudget, requestFilmStaff } from "../services/films";
+import { requestFilm, requestFilmBudget } from "../services/films";
+import { requestFilmStaff } from "../services/staff";
 import { FilmBudgetResponse, FilmResponse, FilmState, StaffResponse } from "../types";
 
 export const fetchFilm = createAsyncThunk<FilmResponse, number>('film/fetchFilm', async (id: number, { rejectWithValue }) => {

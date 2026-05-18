@@ -7,6 +7,7 @@ import { Main } from './pages/Main'
 import { MoviePage } from './pages/MoviePage'
 import { TopMovies } from './pages/TopMovies'
 import { ResultOfSearch } from './pages/ResultOfSearch'
+import { StaffMember } from './pages/StaffMember'
 
 
 const routes: RouteObject[] = [
@@ -45,6 +46,10 @@ const routes: RouteObject[] = [
       { 
         path: 'films/search/:keyword', 
         Component: ResultOfSearch 
+      },
+      {
+        path: 'staff/:staffId',
+        Component: StaffMember,
       },
       {
         path: '/auth/sign-in',

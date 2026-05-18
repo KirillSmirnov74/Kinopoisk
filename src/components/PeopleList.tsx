@@ -1,5 +1,6 @@
 import React from 'react';
-import { PeopleListProps } from '../types';
+import { useNavigate } from 'react-router';
+import { PeopleListProps } from '../types'
 
 
 
@@ -9,23 +10,30 @@ export function PeopleList({ people, maxToShow = 3 }: PeopleListProps): React.Re
         return <span className="text-gray-200">—</span>;
     }
 
-    const visiblePeople = people.slice(0, maxToShow);
-    const remainingCount = people.length - maxToShow;
+    const visiblePeople = people.slice(0, maxToShow)
+    const remainingCount = people.length - maxToShow
+    const navigate = useNavigate()
+
+    function handleClickStaffMember(event: React.MouseEvent<HTMLSpanElement>) {
+        const staffId = event.currentTarget.dataset.id
+        navigate(`/staff/${staffId}`)
+    }
+
 
     return (
-        <div className="text-gray-200 flex items-center flex-wrap gap-x-1">
+        <div className="text-gray-200 flex items-center flex-wrap gap-x-1 curs">
             {visiblePeople.map((person, index, arr) => (
-                <span key={person.staffId}>
+                <span onClick={handleClickStaffMember} className='cursor-pointer' data-id={person.staffId?.toString()} key={person.staffId}>
                     {person.nameRu}
                     {index < arr.length - 1 && ', '}
                 </span>
             ))}
-
             {remainingCount > 0 && (
                 <a className='cursor-pointer'>
                     ... еще
                 </a>
             )}
         </div>
+
     );
 };

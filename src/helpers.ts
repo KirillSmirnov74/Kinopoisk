@@ -29,3 +29,16 @@ export function filterStaffMember(staff: StaffMember[] | null,profession: string
     return staffProfession ? staffProfession : []
 }
 
+export function formatDate(dateString: string | null): string {
+  if (!dateString) return  ''
+  return dateString.split('-').reverse().join('.');
+}
+
+
+export function getValidData(
+  value: string | number | null | undefined, 
+  fallback: string = '—'
+): string {
+  const stringValue = value != null ? String(value).trim() : '';
+  return stringValue || fallback;
+}

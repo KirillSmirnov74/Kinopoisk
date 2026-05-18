@@ -7,7 +7,7 @@ import { useParams } from "react-router";
 import { Pagination } from "../components/Pagination";
 
 export function Main() {
-    const { data: films, totalPages } = useAppSelector((state) => state.films);
+    const { data: films, totalPages, loading } = useAppSelector((state) => state.films);
     const dispatch = useAppDispatch()
     const { pageNumber } = useParams()
 
@@ -18,6 +18,14 @@ export function Main() {
         dispatch(fetchFilms(currentPage));
         window.scrollTo(0, 0);
     }, [dispatch, currentPage]);
+
+    if (loading || !films) {
+        return (
+            <div className="flex items-center justify-center min-h-[50vh] w-full">
+                <p className="text-gray-400 text-lg">Загрузка...</p>
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col items-center min-h-screen w-full">

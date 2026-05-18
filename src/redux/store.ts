@@ -4,6 +4,7 @@ import { filmsReducer } from './films-slice'
 import { filmReducer } from './film-slice'
 import { top250FilmsReducer } from './filmsTop250-slice'
 import { resultsOfSearchReducer } from './films-search-slice'
+import { staffMemberReducer } from './staff-slice'
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     film: filmReducer,
     top250Films: top250FilmsReducer,
     resultsOfSearch: resultsOfSearchReducer,
+    staffMember: staffMemberReducer,
   },
 })
 

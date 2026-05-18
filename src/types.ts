@@ -249,3 +249,69 @@ export interface MovieMetaInfoProps {
   currentPage: number;
   totalPages: number;
 }
+
+
+export interface StaffFilm {
+  filmId: number;
+  nameRu: string;
+  nameEn: string;
+  rating: string;
+  general: boolean;
+  description: string;
+  professionKey: string;
+}
+
+export interface StaffSpouse {
+  personId: number;
+  name: string;
+  divorced: boolean;
+  divorcedReason: string;
+  sex: string;
+  children: number;
+  webUrl: string;
+  relation: string;
+}
+
+export interface StaffDetails {
+  personId: number;
+  webUrl: string;
+  nameRu: string;
+  nameEn: string;
+  sex:  string;
+  posterUrl: string;
+  growth: string;      
+  birthday: string;   
+  death: string;
+  age: number;
+  birthplace: string;
+  deathplace: string;
+  hasAwards: number;
+  profession: string;
+  facts: string[];
+  spouses: StaffSpouse[];
+  films: StaffFilm[];
+}
+
+export interface StaffState {
+  data: StaffDetails | null;
+  filmography: StaffFilm[] | null;
+  filmsDetails: FilmResponse[] | null,
+  loading: boolean;
+  error: boolean;
+}
+
+export type StaffDetailsResponse = StaffDetails
+
+export interface StaffMemberMetaInfoProps {
+  profession: string | null,
+  birthday : string | null,
+  age : number | null,
+  birthplace: string | null,
+  death: string | null,
+  deathplace : string | null
+}
+
+export interface InfoFieldProps {
+  label: string,
+  value : string |  number | null,
+}

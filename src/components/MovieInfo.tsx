@@ -1,7 +1,7 @@
 import React from "react";
 import { Title } from "./Title";
 import { MovieInfoProps } from "../types";
-import { filterStaffMember, getRatingColor, parseAge } from "../helpers";
+import { filterStaffMember, getRatingColor, getValidData, parseAge } from "../helpers";
 import { MovieMetaInfo } from "./MovieMetaInfo";
 
 export function MovieInfo({
@@ -26,16 +26,13 @@ export function MovieInfo({
     const parsedAge = parseAge(ratingAge)
     const directors = filterStaffMember(staff, 'DIRECTOR')
     const actors = filterStaffMember(staff, 'ACTOR')
-    console.log(directors)
-    console.log(actors)
-
 
     const { amount, symbol } = budget?.[0] || {};
-    const validAmount = amount ?? '—'
-    const validSymbol = symbol ?? ''
-    const validOrgName = nameOrg ?? '—'
-    const validYear = year ?? '—'
-    const validSlogan = slogan ?? '—'
+    const validAmount = getValidData(amount)
+    const validSymbol = getValidData(symbol)
+    const validOrgName = getValidData(nameOrg)
+    const validYear = getValidData(year)
+    const validSlogan = getValidData(slogan)
 
     return (
         <div>
