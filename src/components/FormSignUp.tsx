@@ -3,6 +3,7 @@ import { Button } from "./Button";
 import { FormField } from "./FormField";
 import { Island } from "./Island";
 import { Title } from "./Title";
+
 export function FormSignUp() {
     return (
         <div className="flex justify-center items-center min-h-screen w-full">
@@ -10,17 +11,37 @@ export function FormSignUp() {
                 <Title className="text-xl text-center mb-5 text-white" title="Sign Up" />
                 <form>
                     <div>
-                        <FormField type="text" id="name" label="Name" placeholder="Your Name" />
+                        <FormField
+                            type="text"
+                            id="name"
+                            label="Name"
+                            placeholder="Your Name"
+                            className="bg-slate-500 rounded-lg px-2 py-2 max-w-sm w-full outline-none text-sm text-white" />
                     </div>
                     <div className="mt-2">
-                        <FormField type="email" id="email" label="Email" placeholder="Your email" />
+                        <FormField
+                            type="email"
+                            id="email"
+                            label="Email"
+                            placeholder="Your email"
+                            className="bg-slate-500 rounded-lg px-2 py-2 max-w-sm w-full outline-none text-sm text-white" />
                     </div>
                     <div className="mt-2">
-                        <FormField type="password" id="password" label="Password" placeholder="Your password" />
+                        <FormField
+                            type="password"
+                            id="password"
+                            label="Password"
+                            placeholder="Your password"
+                            className="bg-slate-500 rounded-lg px-2 py-2 max-w-sm w-full outline-none text-sm text-white" />
                     </div>
 
                     <div className="mt-2">
-                        <FormField type="password" id="ConfirmPassword" label="ConfirmPassword" placeholder="Confirm password" />
+                        <FormField
+                            type="password"
+                            id="ConfirmPassword"
+                            label="ConfirmPassword"
+                            placeholder="Confirm password"
+                            className="bg-slate-500 rounded-lg px-2 py-2 max-w-sm w-full outline-none text-sm text-white" />
                     </div>
                 </form>
                 <Button className="w-full bg-blue-500 py-2 rounded-xl text-white font-semibold mb-5 mt-8" text="Sign up" />

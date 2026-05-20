@@ -12,10 +12,20 @@ export function FormSignIn() {
                 <Title className="text-xl text-center mb-5 text-white" title="Sign in" />
                 <form className="mb-2">
                     <div>
-                        <FormField type="email" id="email" label="Email" placeholder="Your email" />
+                        <FormField
+                            type="email"
+                            id="email"
+                            label="Email"
+                            placeholder="Your email"
+                            className="bg-slate-500 rounded-lg px-2 py-2 max-w-sm w-full outline-none text-sm text-white" />
                     </div>
                     <div className="mt-2">
-                        <FormField type="password" id="password" label="Password" placeholder="Your password" />
+                        <FormField
+                            type="password"
+                            id="password"
+                            label="Password"
+                            placeholder="Your password"
+                            className="bg-slate-500 rounded-lg px-2 py-2 max-w-sm w-full outline-none text-sm text-white" />
                     </div>
                 </form>
                 <a className=" block text-xs mb-6 mt-3 text-gray-400">Forgot password?</a>

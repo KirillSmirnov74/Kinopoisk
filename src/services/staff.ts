@@ -12,8 +12,6 @@ export async function requestFilmStaff(filmId: number) : Promise<StaffResponse> 
 }
 
 export async function requestStaffMemberDetails(id: number) : Promise<StaffDetailsResponse> {
-    const response = await get(`${API.staff}/${id}`,{
-    
-    })
+    const response = await get(`${API.staff}/${id}`)
     return response.data
 }

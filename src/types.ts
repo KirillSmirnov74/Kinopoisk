@@ -1,11 +1,15 @@
 export type FormFieldProps =  {
-    id: string,
-    label:string,
+    id?: string,
+    label?:string,
     type: string,
     value?: string,
     placeholder: string,
-    // name: string,
-    // onChange:() => void,
+    className: string,
+    classNameForLabel?: string,
+    maxLength?: number,
+    max?: number | string,
+    min?: number | string,
+    step?: string,
 }
 
 export interface FilmModel {
@@ -314,4 +318,53 @@ export interface StaffMemberMetaInfoProps {
 export interface InfoFieldProps {
   label: string,
   value : string |  number | null,
+}
+
+export interface FilterPanelProps {
+  closeFilterPanel : () => void
+}
+
+export interface GenreOption {
+  id: number;
+  genre: string;
+}
+
+export interface CountryOption {
+  id: number;
+  country: string;
+}
+
+export interface FiltersResponse {
+  genres: GenreOption[];
+  countries: CountryOption[];
+}
+
+export interface FiltersState {
+  genres: GenreOption[];
+  countries: CountryOption[];
+  loading: boolean;
+  error: boolean;
+}
+
+export interface FilterFormValues {
+    sortBy: 'RATING' | 'YEAR';
+    filmTitle: string;
+    yearFrom: string;
+    yearTo: string;
+    ratingFrom: string;
+    ratingTo: string;
+    genre: string;
+    country: string;
+}
+
+export interface FilmApiParams {
+    page?: number
+    order?: 'RATING' | 'YEAR' | undefined;
+    keyword?: string;
+    genres?: number[] | undefined;
+    countries?: number[] | undefined;
+    yearFrom?: number;
+    yearTo?: number;
+    ratingFrom?: number;
+    ratingTo?: number;
 }

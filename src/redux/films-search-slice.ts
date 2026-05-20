@@ -1,17 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {  requestFilmsByKeyword } from "../services/films";
-import { SearchFilmsResponse, ResultsOfSearchState} from "../types";
+import { SearchFilmsResponse, ResultsOfSearchState, FilmApiParams } from "../types";
+import { requestFilmsFilters } from "../services/filters";
 
 
-export const fetchResultsOfSearch = createAsyncThunk('resultsOfSearch/fetchResultsOfSearch',async ({page,keyword} : {page : number,keyword: string}, { rejectWithValue }) => {
+export const fetchFilmsFilters = createAsyncThunk('resultsOfSearch/fetchFilmsFilters', async (data: FilmApiParams, { rejectWithValue }) => {
     try {
-      const resultOfSearch = await requestFilmsByKeyword(page,keyword)
-      return resultOfSearch
+        const filmsFilters = await requestFilmsFilters(data)
+        return filmsFilters
     } catch (error) {
-      return rejectWithValue(error as Error)
+        return rejectWithValue(error as Error)
     }
-  }
-)
+})
 
 const initialState: ResultsOfSearchState = {
   data: [],
@@ -30,15 +29,15 @@ export const resultsOfSearchSlice = createSlice({
   }, 
   extraReducers: (builder) => {
 
-      builder.addCase(fetchResultsOfSearch.pending, (state:ResultsOfSearchState ) => {
+      builder.addCase(fetchFilmsFilters.pending, (state:ResultsOfSearchState ) => {
         state.loading = true
       })
-      builder.addCase(fetchResultsOfSearch.fulfilled, (state: ResultsOfSearchState, action: PayloadAction<SearchFilmsResponse>) => {
+      builder.addCase(fetchFilmsFilters.fulfilled, (state: ResultsOfSearchState, action: PayloadAction<SearchFilmsResponse>) => {
         state.loading = false
         state.data = action.payload.items
         state.totalPages = action.payload.totalPages
       })
-      builder.addCase(fetchResultsOfSearch.rejected, (state: ResultsOfSearchState) => {
+      builder.addCase(fetchFilmsFilters.rejected, (state: ResultsOfSearchState) => {
         state.loading = false
         state.error = true
       })

@@ -1,39 +1,31 @@
-// components/Pagination.tsx
-import { Link } from "react-router";
 import { buildPagination } from '../utils/buildPagination';
 
 interface PaginationProps {
     currentPage: number;
     totalPages: number;
-    basePath?: string;
+    onPageChange: (page: number) => void;
 }
 
-export function Pagination({
-    currentPage,
-    totalPages,
-    basePath = '/films'
-}: PaginationProps) {
+export function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
     const pages = buildPagination(currentPage, totalPages);
 
     if (totalPages <= 1 || pages.length === 0) return null;
 
-    const getPageUrl = (page: number) => {
-        if (page === 1) {
-            return basePath;
-        }
-        return `${basePath}/page/${page}`;
-    };
-
     return (
         <div className="flex justify-center items-center gap-2 mt-10">
             {/* Назад */}
-            {currentPage > 1 ? (
-                <Link to={getPageUrl(currentPage - 1)} className="px-3 py-1 text-gray-700 hover:text-black transition-colors">
-                    ←
-                </Link>
-            ) : (
-                <span className="px-3 py-1 text-gray-400">←</span>
-            )}
+            <button
+                type="button"
+                onClick={() => onPageChange(currentPage - 1)}
+                disabled={currentPage <= 1}
+                className={`px-3 py-1 text-sm transition-colors cursor-pointer
+                     ${currentPage <= 1
+                        ? 'text-gray-400 cursor-not-allowed'
+                        : 'text-gray-700 hover:text-black'
+                    }`}
+            >
+                ←
+            </button>
 
             {/* Страницы */}
             {pages.map((page, index) => {
@@ -43,24 +35,30 @@ export function Pagination({
 
                 const isActive = page === currentPage;
                 return (
-                    <Link
-                        key={`${page}-${index}`}
-                        to={getPageUrl(Number(page))}
-                        className={`px-3 py-1 text-sm ${isActive ? 'text-black font-medium' : 'text-gray-500 hover:text-black transition-colors'}`}
+                    <button
+                        key={page}
+                        type="button"
+                        onClick={() => onPageChange(Number(page))}
+                        className={`px-3 py-1 text-sm font-medium transition-colors cursor-pointer
+                             ${isActive ? 'text-black' : 'text-gray-500 hover:text-black'}`}
                     >
                         {page}
-                    </Link>
+                    </button>
                 );
             })}
 
-            {/* Вперед */}
-            {currentPage < totalPages ? (
-                <Link to={getPageUrl(currentPage + 1)} className="px-3 py-1 text-gray-500 hover:text-black transition-colors">
-                    →
-                </Link>
-            ) : (
-                <span className="px-3 py-1 text-gray-500">→</span>
-            )}
+            {/* Вперёд */}
+            <button
+                type="button"
+                onClick={() => onPageChange(currentPage + 1)}
+                disabled={currentPage >= totalPages}
+                className={`px-3 py-1 text-sm transition-colors cursor-pointer ${currentPage >= totalPages
+                    ? 'text-gray-400 cursor-not-allowed'
+                    : 'text-gray-500 hover:text-black'
+                    }`}
+            >
+                →
+            </button>
         </div>
     );
 }

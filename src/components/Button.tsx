@@ -1,5 +1,5 @@
-export function Button({ className, text }: { className: string, text: string }) {
+export function Button({ type, className, text, onClick }: { type?: 'button' | 'submit' | 'reset', className: string, text: string, onClick?: () => void }) {
     return (
-        <button className={className}>{text}</button>
+        <button type={type} onClick={onClick} className={className}>{text}</button>
     )
 }

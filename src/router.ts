@@ -27,24 +27,24 @@ const routes: RouteObject[] = [
         path: 'films/top-250',
         Component: TopMovies,
       },
-      { 
-        path: "films/page/:pageNumber", 
-        Component: Main,
-      },
-      { 
-        path: 'films/top-250/page/:pageNumber',
-        Component: TopMovies,
-      },
+      // { 
+      //   path: "films/page/:pageNumber", 
+      //   Component: Main,
+      // },
+      // { 
+      //   path: 'films/top-250/page/:pageNumber',
+      //   Component: TopMovies,
+      // },
       {
         path: 'search', 
         Component: ResultOfSearch,
       },
-      {
-        path: 'films/search/:keyword/page/:pageNumber',
-        Component: ResultOfSearch,
-      },
+      // {
+      //   path: 'films/search/:keyword/page/:pageNumber',
+      //   Component: ResultOfSearch,
+      // },
       { 
-        path: 'films/search/:keyword', 
+        path: 'films/search', 
         Component: ResultOfSearch 
       },
       {
