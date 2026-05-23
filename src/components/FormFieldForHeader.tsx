@@ -1,14 +1,12 @@
-import { useRef, useEffect, useState } from 'react';
-import Filters from '../assets/icons/Filters.svg?react';
-import { useNavigate } from 'react-router';
-import { FilterPanel } from './FIlterPanel';
-import { createPortal } from 'react-dom';
+import React, { useRef, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
+import { FilterPanel } from './FIlterPanel'
+import { createPortal } from 'react-dom'
+import { FormFieldForHeaderProps } from '../types'
+import Filters from '../assets/icons/Filters.svg?react'
+import Close from '../assets/icons/Close.svg?react'
 
-interface FormFieldProps {
-  onClose?: () => void;
-}
-
-export function FormFieldForHeader({ onClose }: FormFieldProps) {
+export function FormFieldForHeader({ onClose }: FormFieldForHeaderProps): React.ReactElement {
   const inputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
 
@@ -16,26 +14,24 @@ export function FormFieldForHeader({ onClose }: FormFieldProps) {
   const [isOpenFilterPanel, setisOpenFilterPanel] = useState<boolean>(false)
 
   useEffect(() => {
-    inputRef.current?.focus();
+    inputRef.current?.focus()
   }, []);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setSearchValue(event.target.value);
+    setSearchValue(event.target.value)
   }
-
 
   function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
+    event.preventDefault()
 
     if (searchValue.trim()) {
-      const params = new URLSearchParams();
-      params.set('keyword', searchValue.trim());
-      navigate(`/films/search?${params.toString()}`);
+      const params = new URLSearchParams()
+      params.set('keyword', searchValue.trim())
+      navigate(`/films/search?${params.toString()}`)
 
-      if (onClose) onClose();
+      onClose()
     }
   }
-
 
   function handleClickFilterIcon(event?: React.MouseEvent<HTMLButtonElement>) {
     if (event) {
@@ -44,6 +40,7 @@ export function FormFieldForHeader({ onClose }: FormFieldProps) {
       setisOpenFilterPanel(!isOpenFilterPanel)
     }
   }
+
 
   function closeFilterPanel() {
     setisOpenFilterPanel(false)
@@ -63,10 +60,17 @@ export function FormFieldForHeader({ onClose }: FormFieldProps) {
 
         <button
           type='button'
-          className='absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded text-gray-400 hover:text-pink-500 hover:bg-pink-50 transition-colors'
+          className='absolute right-10 top-1/2 -translate-y-1/2 p-1 rounded text-gray-400  hover:text-black transition-colors'
           onClick={handleClickFilterIcon}
         >
           <Filters width={16} height={16} className='fill-current' />
+        </button>
+        <button
+          type='button'
+          className='absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded text-gray-400 hover:text-black transition-colors'
+          onClick={onClose}
+        >
+          <Close width={14} height={14} className='fill-current' />
         </button>
       </form>
 
@@ -74,10 +78,12 @@ export function FormFieldForHeader({ onClose }: FormFieldProps) {
         <div className="fixed top-0 right-0 h-screen max-w-md
         bg-gray-900 shadow-2xl z-[300]
         overflow-y-auto m-0 p-0">
-          <FilterPanel closeFilterPanel={closeFilterPanel} />
+          <FilterPanel
+            closeFilterPanel={closeFilterPanel}
+            closeFormField={onClose} />
         </div>,
         document.body
       )}
     </div>
-  );
+  )
 }

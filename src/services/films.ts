@@ -1,8 +1,8 @@
-import { get } from '../config/http-client'
+import { get } from '../config/http-client-kinopoisk'
 import { API } from '../config/api'
 import { FilmBudgetResponse, FilmResponse, FilmsResponse, SimilarsFilmsResponse } from '../types'
 
-export async function requestFilms(page: number,type: string =  'TOP_POPULAR_MOVIES'): Promise<FilmsResponse> {
+export async function requestFilms(page: number,type: string = 'TOP_POPULAR_MOVIES'): Promise<FilmsResponse> {
     const response = await get(`${API.films}/collections`,{
         params: {
             page,
@@ -12,7 +12,7 @@ export async function requestFilms(page: number,type: string =  'TOP_POPULAR_MOV
     return response.data
 }
 
-export async function requestTop250Films(page: number,type: string =  'TOP_250_MOVIES'): Promise<FilmsResponse> {
+export async function requestTop250Films(page: number,type: string = 'TOP_250_MOVIES'): Promise<FilmsResponse> {
     const response = await get(`${API.films}/collections`,{
         params: {
             page,

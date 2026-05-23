@@ -1,5 +1,6 @@
-import React from "react"
-import { InfoFieldProps } from "../types"
+import React from 'react'
+import { InfoFieldProps } from '../types'
+
 export function InfoField({ label, value }: InfoFieldProps): React.ReactElement | null {
 
     if (!value) {

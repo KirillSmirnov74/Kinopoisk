@@ -1,4 +1,4 @@
-import { get } from '../config/http-client'
+import { get } from '../config/http-client-kinopoisk'
 import { API } from '../config/api'
 import { StaffDetailsResponse, StaffResponse } from '../types'
 

@@ -1,7 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {  requestTop250Films } from "../services/films";
-import { FilmsResponse, Top250FilmsState } from "../types";
-
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {  requestTop250Films } from '../services/films'
+import { FilmsResponse, Top250FilmsState } from '../types'
 
 export const fetchTop250Films = createAsyncThunk('top250Films/fetchTop250Films',async (page: number, { rejectWithValue }) => {
     try {
@@ -29,7 +28,6 @@ export const top250FilmsSlice = createSlice({
     },
   }, 
   extraReducers: (builder) => {
-
       builder.addCase(fetchTop250Films.pending, (state:Top250FilmsState ) => {
         state.loading = true
       })
@@ -44,6 +42,6 @@ export const top250FilmsSlice = createSlice({
       })
 
   },
-});
+})
 export const { setTotalPages } = top250FilmsSlice.actions
 export const top250FilmsReducer =  top250FilmsSlice.reducer

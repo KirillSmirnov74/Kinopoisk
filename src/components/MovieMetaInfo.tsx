@@ -1,6 +1,6 @@
-import React from "react";
-import { PeopleList } from "./PeopleList";
-import { MovieMetaInfoProps } from "../types";
+import React from 'react'
+import { PeopleList } from './PeopleList'
+import { MovieMetaInfoProps } from '../types'
 
 export function MovieMetaInfo({
     orgName,
@@ -13,36 +13,35 @@ export function MovieMetaInfo({
     directorsData,
     actorsData,
 }: MovieMetaInfoProps): React.ReactElement {
+
     return (
-
-
         <div className="border-t border-gray-700/50 pt-8 mb-10">
             <div className="grid grid-cols-[200px_1fr] gap-y-5 text-sm">
 
-                <div className="text-gray-500 font-medium">Оригинальное название</div>
-                <div className="text-gray-200">{orgName}</div>
+                <span className="text-gray-500 font-medium">Оригинальное название</span>
+                <span className="text-gray-200">{orgName}</span>
 
-                <div className="text-gray-500 font-medium">Слоган</div>
-                <div className="text-gray-200">{slogan}</div>
+                <span className="text-gray-500 font-medium">Слоган</span>
+                <span className="text-gray-200">{slogan}</span>
 
-                <div className="text-gray-500 font-medium">Возрастные ограничения</div>
-                <div className="text-gray-200">{age}</div>
+                <span className="text-gray-500 font-medium">Возрастные ограничения</span>
+                <span className="text-gray-200">{age}</span>
 
-                <div className="text-gray-500 font-medium">Год производства</div>
-                <div className="text-gray-200">{year}</div>
+                <span className="text-gray-500 font-medium">Год производства</span>
+                <span className="text-gray-200">{year}</span>
 
-                <div className="text-gray-500 font-medium">Страна</div>
-                <div className="text-gray-200">{countries}</div>
+                <span className="text-gray-500 font-medium">Страна</span>
+                <span className="text-gray-200">{countries}</span>
 
-                <div className="text-gray-500 font-medium">Бюджет</div>
-                <div className="text-gray-200">{symbol} {amount}</div>
+                <span className="text-gray-500 font-medium">Бюджет</span>
+                <span className="text-gray-200">{symbol} {amount}</span>
 
-                <div className="text-gray-500 font-medium">Режисеры</div>
+                <span className="text-gray-500 font-medium">Режисеры</span>
                 <div className="text-gray-200 ">
                     <PeopleList people={directorsData} maxToShow={3} />
                 </div>
 
-                <div className="text-gray-500 font-medium">В главных роляж</div>
+                <span className="text-gray-500 font-medium">В главных роляж</span>
                 <div className="text-gray-200 ">
                     <PeopleList people={actorsData} maxToShow={4} />
                 </div>

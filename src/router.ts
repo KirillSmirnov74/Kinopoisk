@@ -8,6 +8,9 @@ import { MoviePage } from './pages/MoviePage'
 import { TopMovies } from './pages/TopMovies'
 import { ResultOfSearch } from './pages/ResultOfSearch'
 import { StaffMember } from './pages/StaffMember'
+import { FavoritesFilms } from './pages/FavoritesFilms'
+import { ActivationLinkParser } from './components/ActivationLinkParser'
+import { Activation } from './components/Activation'
 
 
 const routes: RouteObject[] = [
@@ -24,25 +27,17 @@ const routes: RouteObject[] = [
         Component: Main,
       },
       {
+        path: 'films/favorites',
+        Component: FavoritesFilms
+      },
+      {
         path: 'films/top-250',
         Component: TopMovies,
       },
-      // { 
-      //   path: "films/page/:pageNumber", 
-      //   Component: Main,
-      // },
-      // { 
-      //   path: 'films/top-250/page/:pageNumber',
-      //   Component: TopMovies,
-      // },
       {
         path: 'search', 
         Component: ResultOfSearch,
       },
-      // {
-      //   path: 'films/search/:keyword/page/:pageNumber',
-      //   Component: ResultOfSearch,
-      // },
       { 
         path: 'films/search', 
         Component: ResultOfSearch 
@@ -58,6 +53,14 @@ const routes: RouteObject[] = [
       {
         path: '/auth/sign-up',
         Component: SignUp
+      },
+         {
+        path: '/auth/activate/link-parser',
+        Component: ActivationLinkParser,
+      },
+       {
+        path: '/auth/activate/:uid/:token',
+        Component: Activation,
       },
       {
         path: '/film/:filmId',

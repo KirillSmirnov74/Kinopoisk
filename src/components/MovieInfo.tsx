@@ -1,8 +1,8 @@
-import React from "react";
-import { Title } from "./Title";
-import { MovieInfoProps } from "../types";
-import { filterStaffMember, getRatingColor, getValidData, parseAge } from "../helpers";
-import { MovieMetaInfo } from "./MovieMetaInfo";
+import React from 'react'
+import { Title } from './Title'
+import { MovieInfoProps } from '../types'
+import { filterStaffMember, getRatingColor, getValidData, parseAge } from '../helpers'
+import { MovieMetaInfo } from './MovieMetaInfo'
 
 export function MovieInfo({
     title,
@@ -27,7 +27,7 @@ export function MovieInfo({
     const directors = filterStaffMember(staff, 'DIRECTOR')
     const actors = filterStaffMember(staff, 'ACTOR')
 
-    const { amount, symbol } = budget?.[0] || {};
+    const { amount, symbol } = budget?.[0] || {}
     const validAmount = getValidData(amount)
     const validSymbol = getValidData(symbol)
     const validOrgName = getValidData(nameOrg)
@@ -38,7 +38,7 @@ export function MovieInfo({
         <div>
             <div className="mb-8">
                 <Title title={title} className="text-5xl font-bold text-white mb-6" />
-                <p className="text-sm font-medium text-gray-500 mb-3 tracking-wide">{genresToStroke}</p>
+                <p className="text-sm font-bold text-gray-400 mb-7 tracking-wide ">{genresToStroke}</p>
 
                 <div className="flex gap-4 items-center">
                     {ratingKinopoisk ? (<span className={`px-4 py-2 rounded-lg text-white text-sm font-bold border ${colors} `}>
@@ -67,7 +67,8 @@ export function MovieInfo({
                 symbol={validSymbol}
                 amount={validAmount}
                 directorsData={directors}
-                actorsData={actors} />
+                actorsData={actors}
+            />
         </div>
     )
 }

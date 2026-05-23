@@ -1,20 +1,20 @@
-export type FormFieldProps =  {
-    id?: string,
-    label?:string,
-    type: string,
-    value?: string,
-    placeholder: string,
-    className: string,
-    classNameForLabel?: string,
-    maxLength?: number,
-    max?: number | string,
-    min?: number | string,
-    step?: string,
+export type FormFieldProps = {
+  id?: string,
+  label?: string,
+  type: string,
+  placeholder?: string,
+  className: string,
+  classNameForLabel?: string,
+  maxLength?: number,
+  max?: number | string,
+  min?: number | string,
+  step?: string,
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export interface FilmModel {
   kinopoiskId: number,
-  imdbId? : string,
+  imdbId?: string,
   nameRu: string | null,
   nameEn: string | null,
   nameOriginal: string | null,
@@ -76,19 +76,19 @@ export interface FilmResponse {
   reviewsCount: number
   ratingGoodReview: number | null
   ratingGoodReviewVoteCount: number | null
-  
+
   ratingKinopoisk: number | null
   ratingKinopoiskVoteCount: number | null
-  
+
   ratingImdb: number | null
   ratingImdbVoteCount: number | null
-  
+
   ratingFilmCritics: number | null
   ratingFilmCriticsVoteCount: number | null
-  
+
   ratingAwait: number | null
   ratingAwaitCount: number | null
-  
+
   ratingRfCritics: number | null
   ratingRfCriticsVoteCount: number | null
 
@@ -140,61 +140,63 @@ export interface BudgetModel {
 }
 
 export interface FilmsState {
-    data: FilmModel[],
-    totalPages: number,
-    similarsFilms: SimilarsFilmModel[],
-    loading: boolean,
-    error: boolean,
+  data: FilmModel[],
+  totalPages: number,
+  similarsFilms: SimilarsFilmModel[],
+  favoritesFilmsIds: number[],
+  favoritesFilms: FilmResponse[],
+  loading: boolean,
+  error: boolean,
 }
 
 export interface Top250FilmsState {
-    data: FilmModel[],
-    totalPages: number,
-    loading: boolean,
-    error: boolean,
+  data: FilmModel[],
+  totalPages: number,
+  loading: boolean,
+  error: boolean,
 }
 
 export interface ResultsOfSearchState {
-    data: FilmModel[],
-    totalPages: number,
-    loading: boolean,
-    error: boolean,
+  data: FilmModel[],
+  totalPages: number,
+  loading: boolean,
+  error: boolean,
 }
 
 export interface FilmState {
-    data: FilmResponse | null,
-    filmBudget: FilmBudgetResponse | null,
-    filmStaff: StaffMember[] | null
-    loading: boolean,
-    error: boolean
+  data: FilmResponse | null,
+  filmBudget: FilmBudgetResponse | null,
+  filmStaff: StaffMember[] | null
+  loading: boolean,
+  error: boolean
 }
 
 export interface MovieListProps {
-  data: FilmModel[],
+  data: FilmResponse[],
 }
 
 export interface MovieCardLProps {
-  kinopoiskId : number,
+  kinopoiskId: number,
   nameRu: string | null,
   posterUrl: string,
   ratingKinopoisk: number | null,
-  year: number | null,           
-  genres: { genre: string }[], 
+  year: number | null,
+  genres: { genre: string }[],
   onClickCard: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export interface MovieInfoProps {
-  title : string | null,
-  ratingKinopoisk : number | null,
-  IMDbRating : number | null,
-  filmLength : number | null,
-  description : string | null,
-  year : number | null,
+  title: string | null,
+  ratingKinopoisk: number | null,
+  IMDbRating: number | null,
+  filmLength: number | null,
+  description: string | null,
+  year: number | null,
   nameOrg: string | null,
-  genres: {genre: string}[] | null,
-  countries : {country: string}[] | null
+  genres: { genre: string }[] | null,
+  countries: { country: string }[] | null
   budget: BudgetModel[] | null,
-  ratingAge : string | null,
+  ratingAge: string | null,
   slogan: string | null,
   staff: StaffMember[] | null,
 }
@@ -222,34 +224,34 @@ export interface MovieCardForSwiperProps {
 
 export interface StaffMember {
   staffId: number | null,
-  nameRu : string | null,
-  nameEn : string | null,
-  description : string | null,
-  posterUrl : string | null,
-  professionText : string | null,
-  professionKey : string | null,
+  nameRu: string | null,
+  nameEn: string | null,
+  description: string | null,
+  posterUrl: string | null,
+  professionText: string | null,
+  professionKey: string | null,
 }
 
 export type StaffResponse = StaffMember[];
 
 export interface PeopleListProps {
-    people: StaffMember[] | null;
-    maxToShow?: number;
+  people: StaffMember[] | null;
+  maxToShow?: number;
 }
 
 export interface MovieMetaInfoProps {
-   orgName: string | null,
-    slogan: string |  null,
-    age : string | null,
-    year : string | number
-    countries : string,
-    symbol : string | null,
-    amount : string | number,
-    directorsData: StaffMember[] | null,
-    actorsData: StaffMember[] | null,
+  orgName: string | null,
+  slogan: string | null,
+  age: string | null,
+  year: string | number
+  countries: string,
+  symbol: string | null,
+  amount: string | number,
+  directorsData: StaffMember[] | null,
+  actorsData: StaffMember[] | null,
 }
 
- export interface PaginationProps {
+export interface PaginationProps {
   currentPage: number;
   totalPages: number;
 }
@@ -281,10 +283,10 @@ export interface StaffDetails {
   webUrl: string;
   nameRu: string;
   nameEn: string;
-  sex:  string;
+  sex: string;
   posterUrl: string;
-  growth: string;      
-  birthday: string;   
+  growth: string;
+  birthday: string;
   death: string;
   age: number;
   birthplace: string;
@@ -308,20 +310,21 @@ export type StaffDetailsResponse = StaffDetails
 
 export interface StaffMemberMetaInfoProps {
   profession: string | null,
-  birthday : string | null,
-  age : number | null,
+  birthday: string | null,
+  age: number | null,
   birthplace: string | null,
   death: string | null,
-  deathplace : string | null
+  deathplace: string | null
 }
 
 export interface InfoFieldProps {
   label: string,
-  value : string |  number | null,
+  value: string | number | null,
 }
 
 export interface FilterPanelProps {
-  closeFilterPanel : () => void
+  closeFilterPanel: () => void
+  closeFormField: () => void
 }
 
 export interface GenreOption {
@@ -347,24 +350,104 @@ export interface FiltersState {
 }
 
 export interface FilterFormValues {
-    sortBy: 'RATING' | 'YEAR';
-    filmTitle: string;
-    yearFrom: string;
-    yearTo: string;
-    ratingFrom: string;
-    ratingTo: string;
-    genre: string;
-    country: string;
+  sortBy: 'RATING' | 'YEAR';
+  filmTitle: string;
+  yearFrom: string;
+  yearTo: string;
+  ratingFrom: string;
+  ratingTo: string;
+  genre: string;
+  country: string;
 }
 
 export interface FilmApiParams {
-    page?: number
-    order?: 'RATING' | 'YEAR' | undefined;
-    keyword?: string;
-    genres?: number[] | undefined;
-    countries?: number[] | undefined;
-    yearFrom?: number;
-    yearTo?: number;
-    ratingFrom?: number;
-    ratingTo?: number;
+  page?: number
+  order?: 'RATING' | 'YEAR' | undefined;
+  keyword?: string;
+  genres?: number[] | undefined;
+  countries?: number[] | undefined;
+  yearFrom?: number;
+  yearTo?: number;
+  ratingFrom?: number;
+  ratingTo?: number;
+}
+
+export interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset',
+  className: string,
+  text?: string,
+  onClick?: () => void,
+}
+
+export interface FormFieldForHeaderProps {
+  onClose: () => void
+}
+
+export interface MainProps {
+  children?: React.ReactNode
+}
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+
+export interface FormSignUpValues {
+  username: string,
+  email: string,
+  password: string,
+  confirmPassword: string
+}
+
+export interface FormSignInValues {
+  email: string,
+  password: string
+}
+
+export type SignInData = FormSignInValues
+
+export interface AuthState {
+  user: UserModel | null,
+  AboutUser: AboutUserData | null,
+  jwt: JwtModel | null,
+  isActivated: boolean,
+  loading: boolean,
+  error: boolean,
+}
+
+export interface UserModel {
+  id: number
+  username: string,
+  email: string,
+  course_group: number
+}
+
+export interface JwtModel {
+  access: string,
+  refresh: string,
+}
+
+export type SignUpData = {
+  username: string
+  email: string
+  password: string
+  course_group?: string
+}
+
+export interface ActivateData {
+  uid: string,
+  token: string
+}
+
+export interface AboutUserData {
+  username: string,
+  id: number,
+  email: string
+}
+
+export interface UserPickProps {
+  onClick: () => void,
+  isOpen: boolean,
+  infoAboutUser: AboutUserData | null
 }

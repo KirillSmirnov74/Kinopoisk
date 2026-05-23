@@ -1,23 +1,23 @@
-import React, { useEffect } from "react";
-import Close from '../assets/icons/Close.svg?react';
-import { Title } from "./Title";
-import { FilterPanelProps, FilterFormValues } from "../types";
-import { useAppDispatch, useAppSelector } from "../redux/store";
-import { fetchFilters } from "../redux/filters-slice";
-import { Button } from "./Button";
-import { FormField } from "./FormField";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useSearchParams, useNavigate } from "react-router";
+import React, { useEffect } from 'react'
+import Close from '../assets/icons/Close.svg?react'
+import { Title } from './Title'
+import { FilterPanelProps, FilterFormValues } from '../types'
+import { useAppDispatch, useAppSelector } from '../redux/store'
+import { fetchFilters } from '../redux/filters-slice'
+import { Button } from './Button'
+import { FormField } from './FormField'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { useSearchParams, useNavigate } from 'react-router'
 
-export function FilterPanel({ closeFilterPanel }: FilterPanelProps): React.ReactElement {
-    const dispatch = useAppDispatch();
-    const [searchParams] = useSearchParams();
+export function FilterPanel({ closeFilterPanel, closeFormField }: FilterPanelProps): React.ReactElement {
+    const dispatch = useAppDispatch()
+    const [searchParams] = useSearchParams()
     const navigate = useNavigate()
-    const genres = useAppSelector((store) => store.filters.genres);
-    const countries = useAppSelector((store) => store.filters.countries);
+    const genres = useAppSelector((store) => store.filters.genres)
+    const countries = useAppSelector((store) => store.filters.countries)
 
 
-    const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<FilterFormValues>({
+    const { register, handleSubmit, watch, setValue, reset, formState: { errors } } = useForm<FilterFormValues>({
         defaultValues: {
             sortBy: 'RATING',
             filmTitle: '',
@@ -30,55 +30,61 @@ export function FilterPanel({ closeFilterPanel }: FilterPanelProps): React.React
         }
     });
 
-    const sortBy = watch('sortBy');
+    const sortBy = watch('sortBy')
 
     const onSubmit: SubmitHandler<FilterFormValues> = (data) => {
-        const params = new URLSearchParams(searchParams);
+        const params = new URLSearchParams(searchParams)
 
-        if (data.sortBy) params.set('order', data.sortBy);
+        if (data.sortBy) params.set('order', data.sortBy)
         if (data.filmTitle.trim()) {
-            params.set('keyword', data.filmTitle.trim());
+            params.set('keyword', data.filmTitle.trim())
         } else {
-            params.delete('keyword');
+            params.delete('keyword')
         }
 
-        if (data.genre) params.set('genres', data.genre);
-        else params.delete('genres');
+        if (data.genre) params.set('genres', data.genre)
+        else params.delete('genres')
 
-        if (data.country) params.set('countries', data.country);
-        else params.delete('countries');
+        if (data.country) params.set('countries', data.country)
+        else params.delete('countries')
 
-        if (data.yearFrom) params.set('yearFrom', String(data.yearFrom));
-        else params.delete('yearFrom');
+        if (data.yearFrom) params.set('yearFrom', String(data.yearFrom))
+        else params.delete('yearFrom')
 
-        if (data.yearTo) params.set('yearTo', String(data.yearTo));
-        else params.delete('yearTo');
+        if (data.yearTo) params.set('yearTo', String(data.yearTo))
+        else params.delete('yearTo')
 
-        if (data.ratingFrom) params.set('ratingFrom', String(data.ratingFrom));
-        else params.delete('ratingFrom');
+        if (data.ratingFrom) params.set('ratingFrom', String(data.ratingFrom))
+        else params.delete('ratingFrom')
 
-        if (data.ratingTo) params.set('ratingTo', String(data.ratingTo));
-        else params.delete('ratingTo');
+        if (data.ratingTo) params.set('ratingTo', String(data.ratingTo))
+        else params.delete('ratingTo')
 
-        navigate(`/films/search?${params.toString()}`);
-        closeFilterPanel();
+        navigate(`/films/search?${params.toString()}`)
+        closeFilterPanel()
+        closeFormField()
     };
 
     useEffect(() => {
-        dispatch(fetchFilters());
+        dispatch(fetchFilters())
     }, [dispatch])
 
-    const renderAlert = (text: string | undefined) => {
+    function renderAlert(text: string | undefined): React.ReactElement {
         return (
             <div className="text-xs mt-2 text-red-400">{text}</div>
         )
     }
 
+    function handleResetForm() {
+        reset()
+    }
+
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex flex-col bg-gray-900 text-gray-200">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex flex-col bg-gray-900 text-gray-200 border-l overflow-y-auto">
             {/* Шапка */}
             <div className="flex items-center justify-between p-5 border-b border-gray-800 shrink-0">
-                <Title title='Фильтры' className="text-lg font-semibold" />
+                <Title title="Фильтры" className="text-lg font-semibold" />
                 <button type="button" onClick={closeFilterPanel} className="p-1.5 rounded-md text-gray-500 hover:text-white hover:bg-gray-800 active:bg-gray-700 transition-colors cursor-pointer">
                     <Close width={15} height={15} fill="white" />
                 </button>
@@ -98,7 +104,6 @@ export function FilterPanel({ closeFilterPanel }: FilterPanelProps): React.React
                                 }`}
                             text="По рейтингу"
                         />
-
                         <Button
                             type="button"
                             onClick={() => setValue('sortBy', 'YEAR')}
@@ -117,7 +122,7 @@ export function FilterPanel({ closeFilterPanel }: FilterPanelProps): React.React
                         label="Название фильма"
                         placeholder="Введите название..."
                         className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 hover:border-gray-600 transition-all cursor-text"
-                        {...register('filmTitle', { maxLength: 50 })}
+                        {...register('filmTitle', { maxLength: 50, })}
                     />
                     {errors.filmTitle && renderAlert('Название должно быть не длинее 50 символов')}
                 </section>
@@ -197,7 +202,7 @@ export function FilterPanel({ closeFilterPanel }: FilterPanelProps): React.React
                         className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 hover:border-gray-600 transition-all cursor-pointer appearance-none"
                         {...register('genre')}
                     >
-                        <option value="">Все жанры</option>
+                        <option>Все жанры</option>
                         {genres.map(g => (
                             <option key={g.id} value={g.id}>{g.genre}</option>
                         ))}
@@ -211,7 +216,7 @@ export function FilterPanel({ closeFilterPanel }: FilterPanelProps): React.React
                         className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 hover:border-gray-600 transition-all cursor-pointer appearance-none"
                         {...register('country')}
                     >
-                        <option value="">Все страны</option>
+                        <option>Все страны</option>
                         {countries.map(c => (
                             <option key={c.id} value={c.id}>{c.country}</option>
                         ))}
@@ -224,6 +229,7 @@ export function FilterPanel({ closeFilterPanel }: FilterPanelProps): React.React
                 <Button type="button"
                     className="flex-1 py-2 px-4 rounded-lg border border-gray-700 text-gray-400 font-medium text-sm hover:bg-gray-800 hover:text-white active:bg-gray-700 transition-colors cursor-pointer"
                     text="Сбросить"
+                    onClick={handleResetForm}
                 />
                 <Button
                     type="submit"
@@ -232,7 +238,7 @@ export function FilterPanel({ closeFilterPanel }: FilterPanelProps): React.React
                 />
             </div>
         </form>
-    );
+    )
 }
 
 

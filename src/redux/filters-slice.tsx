@@ -1,7 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FiltersResponse, FiltersState } from "../types";
-import { requestFilters } from "../services/filters";
-
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { FiltersResponse, FiltersState } from '../types'
+import { requestFilters } from '../services/filters'
 
 export const fetchFilters = createAsyncThunk('filters/fetchFilters', async (_, { rejectWithValue }) => {
     try {
@@ -12,20 +11,18 @@ export const fetchFilters = createAsyncThunk('filters/fetchFilters', async (_, {
     }
 })
 
-
 const initialState: FiltersState = {
     countries: [],
     genres: [],
     loading: false,
     error: false,
-};
+}
 
 export const FiltersSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-
         builder.addCase(fetchFilters.pending, (state: FiltersState) => {
             state.loading = true
         })
@@ -39,5 +36,5 @@ export const FiltersSlice = createSlice({
             state.error = true
         })
     },
-});
+})
 export const FiltersReducer = FiltersSlice.reducer

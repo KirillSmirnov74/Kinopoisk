@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { requestFilm, requestFilmBudget } from "../services/films";
-import { requestFilmStaff } from "../services/staff";
-import { FilmBudgetResponse, FilmResponse, FilmState, StaffResponse } from "../types";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { requestFilm, requestFilmBudget } from '../services/films'
+import { requestFilmStaff } from '../services/staff'
+import { FilmBudgetResponse, FilmResponse, FilmState, StaffResponse } from '../types'
 
 export const fetchFilm = createAsyncThunk<FilmResponse, number>('film/fetchFilm', async (id: number, { rejectWithValue }) => {
     try {
@@ -49,7 +49,6 @@ export const filmSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-
         builder.addCase(fetchFilm.pending, (state: FilmState) => {
             state.loading = true
         })
@@ -61,7 +60,6 @@ export const filmSlice = createSlice({
             state.loading = false
             state.error = true
         })
-
 
         builder.addCase(fetchFilmBudget.pending, (state: FilmState) => {
             state.loading = true
@@ -75,7 +73,6 @@ export const filmSlice = createSlice({
             state.error = true
         })
 
-
         builder.addCase(fetchFilmStaff.pending, (state: FilmState) => {
             state.loading = true
         })
@@ -88,7 +85,7 @@ export const filmSlice = createSlice({
             state.error = true
         })
     },
-});
+})
 
 export const { clearFilm } = filmSlice.actions
 export const filmReducer = filmSlice.reducer

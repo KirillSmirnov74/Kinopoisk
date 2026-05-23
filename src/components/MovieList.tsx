@@ -1,20 +1,22 @@
-import { MovieListProps } from "../types";
-import { MovieCardL } from "./MovieCardL";
-import { useNavigate } from "react-router";
+import React from 'react';
+import { MovieListProps } from '../types'
+import { MovieCardL } from './MovieCardL'
+import { useNavigate } from 'react-router'
 
 export function MovieList({ data }: MovieListProps): React.ReactElement {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   function handleClickCardFilm(event: React.MouseEvent<HTMLDivElement>) {
-    const filmElement = (event.target as HTMLElement).closest('[data-id]');
+    const filmElement = (event.target as HTMLElement).closest('[data-id]')
+
     if (filmElement) {
-      const filmId = (filmElement as HTMLElement).dataset.id;
-      navigate(`/film/${filmId}`);
+      const filmId = (filmElement as HTMLElement).dataset.id
+      navigate(`/film/${filmId}`)
     }
   }
 
   return (
-    <div className='grid grid-cols-5 gap-5 w-full'>
+    <div className="grid grid-cols-5 gap-5 w-full">
       {data.map((film) => (
         <MovieCardL
           kinopoiskId={film.kinopoiskId}
@@ -28,5 +30,5 @@ export function MovieList({ data }: MovieListProps): React.ReactElement {
         />
       ))}
     </div>
-  );
+  )
 }

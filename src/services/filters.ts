@@ -1,4 +1,4 @@
-import { get } from '../config/http-client'
+import { get } from '../config/http-client-kinopoisk'
 import { API } from '../config/api'
 import { FiltersResponse,FilmsResponse } from '../types'
 import { FilmApiParams } from '../types'
@@ -8,7 +8,7 @@ export async function requestFilters(): Promise<FiltersResponse> {
     return response.data
 }
 
-export async function requestFilmsFilters(data: FilmApiParams ):  Promise<FilmsResponse> {
+export async function requestFilmsFilters(data: FilmApiParams ): Promise<FilmsResponse> {
     const response = await get(`${API.films}`,{
         params : {
             ...data

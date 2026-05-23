@@ -1,30 +1,31 @@
-import { FormFieldProps } from "../types";
+import React from 'react'
+import { FormFieldProps } from '../types'
 
 export function FormField({
     id,
     label,
     type,
-    value,
     placeholder,
     className,
     step,
     classNameForLabel,
+    onChange,
     ...props
-}: FormFieldProps) {
+}: FormFieldProps): React.ReactElement {
     return (
         <>
             <label className={classNameForLabel} htmlFor={id}>
                 {label}
             </label>
             <input
+                onChange={onChange}
                 className={className}
                 type={type}
                 id={id}
-                value={value}
                 placeholder={placeholder}
                 step={step}
                 {...props}
             />
         </>
-    );
+    )
 }

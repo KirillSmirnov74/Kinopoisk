@@ -1,7 +1,9 @@
-export function Footer() {
+import React from 'react'
+
+export function Footer(): React.ReactElement {
   return (
-    <footer className=''>
-      <p className=''>© All Rights Reserved</p>
+    <footer>
+      <p className="text-base font-semibold text-white">© All Rights Reserved</p>
     </footer>
   );
 }

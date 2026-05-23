@@ -1,23 +1,25 @@
-import React, { useEffect } from "react"
-import { useParams } from "react-router"
-import { useAppDispatch, useAppSelector } from "../redux/store"
-import { fetchStaffMemberDetails, fetchFilmsDetailsByIds, clearStaffMember } from "../redux/staff-slice"
-import { PosterL } from "../components/PosterL"
-import { Title } from "../components/Title"
-import { getFilmsWithPoster } from "../helpers"
-import { SwiperComponent } from "../components/Swiper"
-import { StaffMemberMetaInfo } from "../components/StaffMemberMetaInfo"
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router'
+import { useAppDispatch, useAppSelector } from '../redux/store'
+import { fetchStaffMemberDetails, fetchFilmsDetailsByIds, clearStaffMember } from '../redux/staff-slice'
+import { PosterL } from '../components/PosterL'
+import { Title } from '../components/Title'
+import { getFilmsWithPoster } from '../helpers'
+import { SwiperComponent } from '../components/Swiper'
+import { StaffMemberMetaInfo } from '../components/StaffMemberMetaInfo'
 
 export function StaffMember(): React.ReactElement {
 
     const { staffId } = useParams()
     const dispatch = useAppDispatch()
+
     const {
         data: staffMemBer,
         filmography: filmsByStaffMember,
         filmsDetails: filmsByStaff,
         loading
     } = useAppSelector((store) => store.staffMember)
+
     const filmsWithPoster = getFilmsWithPoster(filmsByStaff || [])
 
     useEffect(() => {
@@ -27,13 +29,10 @@ export function StaffMember(): React.ReactElement {
 
     useEffect(() => {
         if (filmsByStaffMember && filmsByStaffMember.length > 0) {
-            const uniqueIds = Array.from(
-                new Set(filmsByStaffMember.map(film => film.filmId))
-            );
-
-            dispatch(fetchFilmsDetailsByIds(uniqueIds));
+            const uniqueIds = Array.from(new Set(filmsByStaffMember.map(film => film.filmId)))
+            dispatch(fetchFilmsDetailsByIds(uniqueIds))
         }
-    }, [filmsByStaffMember, dispatch]);
+    }, [filmsByStaffMember, dispatch])
 
     if (loading || !staffMemBer) {
         return (
@@ -66,5 +65,5 @@ export function StaffMember(): React.ReactElement {
                 </div>
             </div>
         </div>
-    );
+    )
 }

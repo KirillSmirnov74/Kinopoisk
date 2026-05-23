@@ -1,39 +1,38 @@
-import { useEffect } from "react";
-import { MovieList } from "../components/MovieList";
-import { useAppSelector, useAppDispatch } from "../redux/store";
-import { fetchFilms } from "../redux/films-slice";
-import { getFilmsWithPoster } from "../helpers";
-import { useSearchParams } from "react-router";
-import { Pagination } from "../components/Pagination";
+import React, { useEffect } from 'react'
+import { MovieList } from '../components/MovieList'
+import { useAppSelector, useAppDispatch } from '../redux/store'
+import { fetchFilms } from '../redux/films-slice'
+import { getFilmsWithPoster } from '../helpers'
+import { useSearchParams } from 'react-router'
+import { Pagination } from '../components/Pagination'
 
-export function Main() {
-    const { data: films, totalPages, loading } = useAppSelector((state) => state.films);
-    const dispatch = useAppDispatch();
+export function Main(): React.ReactElement {
+    const { data: films, totalPages, loading } = useAppSelector((state) => state.films)
+    const dispatch = useAppDispatch()
+    const [searchParams, setSearchParams] = useSearchParams()
 
-    const [searchParams, setSearchParams] = useSearchParams();
-
-    const pageParam = searchParams.get('page');
-    const currentPage = pageParam ? Number(pageParam) : 1;
+    const pageParam = searchParams.get('page')
+    const currentPage = pageParam ? Number(pageParam) : 1
 
     function handlePageChange(newPage: number) {
-        const params = new URLSearchParams(searchParams);
-        params.set("page", String(newPage));
-        setSearchParams(params);
-    };
+        const params = new URLSearchParams(searchParams)
+        params.set("page", String(newPage))
+        setSearchParams(params)
+    }
 
-    const validFilms = getFilmsWithPoster(films || []);
+    const validFilms = getFilmsWithPoster(films || [])
 
     useEffect(() => {
-        dispatch(fetchFilms(currentPage));
-        window.scrollTo(0, 0);
-    }, [dispatch, currentPage]);
+        dispatch(fetchFilms(currentPage))
+        window.scrollTo(0, 0)
+    }, [dispatch, currentPage])
 
     if (loading || !films) {
         return (
             <div className="flex items-center justify-center min-h-[50vh] w-full">
                 <p className="text-gray-400 text-lg">Загрузка...</p>
             </div>
-        );
+        )
     }
 
     return (
@@ -49,5 +48,5 @@ export function Main() {
                 </div>
             </div>
         </div>
-    );
+    )
 }

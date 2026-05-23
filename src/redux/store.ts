@@ -6,6 +6,7 @@ import { top250FilmsReducer } from './filmsTop250-slice'
 import { resultsOfSearchReducer } from './films-search-slice'
 import { staffMemberReducer } from './staff-slice'
 import { FiltersReducer } from './filters-slice'
+import { authReducer } from './auth-slice'
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     resultsOfSearch: resultsOfSearchReducer,
     staffMember: staffMemberReducer,
     filters: FiltersReducer,
+    auth: authReducer
   },
 })
 
