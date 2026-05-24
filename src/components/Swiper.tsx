@@ -1,12 +1,12 @@
 import React from 'react'
 import { Pagination, Scrollbar, Mousewheel, Autoplay, Keyboard, FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { SimilarsFilmModel } from '../types'
+import { SwiperComponentProps } from '../types'
 import { MovieCardForSwiper } from './MovieCardForSwiper'
 import '../styles/swiper.css'
 
 
-export function SwiperComponent({ data }: { data: SimilarsFilmModel[] }): React.ReactElement {
+export function SwiperComponent({ data }: SwiperComponentProps): React.ReactElement {
 
     const validData = data.filter(film =>
         film.posterUrl &&

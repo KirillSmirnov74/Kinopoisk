@@ -149,7 +149,7 @@ export interface FilmsState {
   error: boolean,
 }
 
-export interface Top250FilmsState {
+export interface TopRatedFilmsState {
   data: FilmModel[],
   totalPages: number,
   loading: boolean,
@@ -450,4 +450,30 @@ export interface UserPickProps {
   onClick: () => void,
   isOpen: boolean,
   infoAboutUser: AboutUserData | null
+}
+
+export type RequestStatus = 'idle' | 'loading' | 'success' | 'error'
+
+export interface CollapseProps {
+  onCloseCollapse?: () => void
+}
+
+export interface IslandProps {
+  children: React.ReactNode
+}
+
+export interface PosterLProps {
+  posterUrl: string
+}
+
+export type PosterMProps = PosterLProps
+export type StaffMemberPosterProps = PosterLProps
+
+export interface SwiperComponentProps {
+  data: SimilarsFilmModel[]
+}
+
+export interface TitleProps {
+  title: string | null,
+  className: string
 }

@@ -4,6 +4,7 @@ export const baseUrlAuth = 'https://studapi.teachmeskills.by'
 const filmsEndpoint = '/api/v2.2/films' // AllFilms
 const staffEndpoint = '/api/v1/staff'
 
+// Auth
 const authSignInEndpoint = '/auth/jwt/create/'
 const authUsersEndpoint = '/auth/users/'
 const authUsersActivateEndpoint = '/auth/users/activation/'

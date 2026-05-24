@@ -1,4 +1,7 @@
-export function PosterM({ posterUrl }: { posterUrl: string }) {
+import React from 'react'
+import { PosterMProps } from '../types'
+
+export function PosterM({ posterUrl }: PosterMProps): React.ReactElement {
     return (
         <div className="mb-2">
             <img

@@ -5,7 +5,7 @@ import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
 import { Main } from './pages/Main'
 import { MoviePage } from './pages/MoviePage'
-import { TopMovies } from './pages/TopMovies'
+import { TopRatedFilms } from './pages/TopRatedFilms'
 import { ResultOfSearch } from './pages/ResultOfSearch'
 import { StaffMember } from './pages/StaffMember'
 import { FavoritesFilms } from './pages/FavoritesFilms'
@@ -18,8 +18,8 @@ const routes: RouteObject[] = [
     path: '/',
     Component: Layout,
     children: [
-       {
-        index: true, 
+      {
+        index: true,
         Component: Main,
       },
       {
@@ -31,16 +31,16 @@ const routes: RouteObject[] = [
         Component: FavoritesFilms
       },
       {
-        path: 'films/top-250',
-        Component: TopMovies,
+        path: 'films/top-rated',
+        Component: TopRatedFilms,
       },
       {
-        path: 'search', 
+        path: 'search',
         Component: ResultOfSearch,
       },
-      { 
-        path: 'films/search', 
-        Component: ResultOfSearch 
+      {
+        path: 'films/search',
+        Component: ResultOfSearch
       },
       {
         path: 'staff/:staffId',
@@ -54,11 +54,11 @@ const routes: RouteObject[] = [
         path: '/auth/sign-up',
         Component: SignUp
       },
-         {
+      {
         path: '/auth/activate/link-parser',
         Component: ActivationLinkParser,
       },
-       {
+      {
         path: '/auth/activate/:uid/:token',
         Component: Activation,
       },

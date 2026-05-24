@@ -1,6 +1,7 @@
 import React from 'react'
+import { StaffMemberPosterProps } from '../types'
 
-export function StaffMemberPoster({ posterUrl }: { posterUrl: string }): React.ReactElement {
+export function StaffMemberPoster({ posterUrl }: StaffMemberPosterProps): React.ReactElement {
     return (
         <div className="w-80 flex-shrink-0">
             <img

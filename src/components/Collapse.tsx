@@ -3,10 +3,8 @@ import { Link, useNavigate } from 'react-router'
 import { useAppDispatch, useAppSelector } from '../redux/store'
 import { logoutUser } from '../redux/auth-slice'
 import { Button } from './Button'
+import { CollapseProps } from '../types'
 
-interface CollapseProps {
-    onCloseCollapse?: () => void
-}
 
 export function Collapse({ onCloseCollapse }: CollapseProps): React.ReactElement {
     const isAuthorised = useAppSelector((store) => store.auth.jwt) !== null

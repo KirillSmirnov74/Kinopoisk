@@ -33,7 +33,6 @@ export function FormSignIn(): React.ReactElement {
         } catch (error) {
             console.log(error)
         }
-
     }
 
     return (

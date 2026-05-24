@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import { MovieList } from '../components/MovieList'
 import { useAppSelector, useAppDispatch } from '../redux/store'
-import { fetchTop250Films } from '../redux/filmsTop250-slice'
+import { fetchTopRatedFilms } from '../redux/top-rated-slice'
 import { getFilmsWithPoster } from '../helpers'
 import { useSearchParams } from 'react-router'
 import { Pagination } from '../components/Pagination'
 
-export function TopMovies() {
-    const { data: top250Films, totalPages, loading } = useAppSelector((state) => state.top250Films)
+export function TopRatedFilms() {
+    const { data: topFilms, totalPages, loading } = useAppSelector((state) => state.topRatedFilms)
     const dispatch = useAppDispatch()
 
     const [searchParams, setSearchParams] = useSearchParams()
@@ -20,14 +20,14 @@ export function TopMovies() {
         setSearchParams(params)
     }
 
-    const filmsWithPoster = getFilmsWithPoster(top250Films || [])
+    const filmsWithPoster = getFilmsWithPoster(topFilms || [])
 
     useEffect(() => {
-        dispatch(fetchTop250Films(currentPage))
+        dispatch(fetchTopRatedFilms(currentPage))
         window.scrollTo(0, 0)
     }, [dispatch, currentPage])
 
-    if (loading || !top250Films) {
+    if (loading || !topFilms) {
         return (
             <div className="flex items-center justify-center min-h-[50vh] w-full">
                 <p className="text-gray-400 text-lg">Загрузка...</p>

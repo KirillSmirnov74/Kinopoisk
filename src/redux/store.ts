@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
 import { filmsReducer } from './films-slice'
 import { filmReducer } from './film-slice'
-import { top250FilmsReducer } from './filmsTop250-slice'
+import { topRatedFilmsReducer } from './top-rated-slice'
 import { resultsOfSearchReducer } from './films-search-slice'
 import { staffMemberReducer } from './staff-slice'
 import { FiltersReducer } from './filters-slice'
@@ -12,7 +12,7 @@ export const store = configureStore({
   reducer: {
     films: filmsReducer,
     film: filmReducer,
-    top250Films: top250FilmsReducer,
+    topRatedFilms: topRatedFilmsReducer,
     resultsOfSearch: resultsOfSearchReducer,
     staffMember: staffMemberReducer,
     filters: FiltersReducer,

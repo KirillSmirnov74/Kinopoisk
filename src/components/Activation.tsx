@@ -3,12 +3,13 @@ import { useAppDispatch } from '../redux/store'
 import { useParams, Link } from 'react-router'
 import { activateUser } from '../redux/auth-slice'
 import { Title } from './Title'
+import { RequestStatus } from '../types'
 
 
 export function Activation(): React.ReactElement {
     const { uid, token } = useParams()
     const dispatch = useAppDispatch()
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+    const [status, setStatus] = useState<RequestStatus>('idle')
 
     useEffect(() => {
         if (!uid || !token) return

@@ -1,6 +1,7 @@
 import React from 'react'
+import { PosterLProps } from '../types'
 
-export function PosterL({ posterUrl }: { posterUrl: string }): React.ReactElement {
+export function PosterL({ posterUrl }: PosterLProps): React.ReactElement {
     return (
         <div className="w-80 flex-shrink-0">
             <img
